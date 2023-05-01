@@ -1,0 +1,664 @@
+html {
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body, h1, h2, h3, h4, h5, h6, p, ol, ul {
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+body{
+    background: var(--black);
+}
+@font-face {
+    font-family: "IBM Plex Sans";
+    font-weight: 400;
+    font-style: normal;
+    src: url(../fonts/IBMPlexSans-Regular.ttf);
+}
+@font-face {
+    font-family: "IBM Plex Sans";
+    font-weight: 500;
+    font-style: normal;
+    src: url(../fonts/IBMPlexSans-Medium.ttf);
+}
+@font-face {
+    font-family: "IBM Plex Sans";
+    font-weight: bold;
+    font-style: normal;
+    src: url(../fonts/IBMPlexSans-Bold.ttf);
+}
+
+
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+}
+.block-button{
+    margin-top: 20px;
+}
+:root{
+    --white: RGB(255, 255, 255);
+    --black: black;
+    --light_black: #222222;
+    --light_gray: #CCCCCC;
+    --gray: #939393;
+    --yellow: #fcc942;
+}
+#phone-field, #password-field{
+    color: #c70202;
+    margin-top: 10px;
+    font-weight: 400;
+    font-family: "IBM Plex Sans";
+    font-size: 14px;
+    display: block;
+    width: 300px;
+}
+.default-form  label{
+    color: var(--white)
+}
+.default-form {
+    display: flex;
+    flex-direction: column;
+}
+.default-form select{
+    outline: none;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid var(--yellow);
+    color: var(--gray);
+    font-family: "IBM Plex Sans";
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+}
+.default-form ption{
+    background: var(--light_gray);
+    color: var(--black);
+    font-family: "IBM Plex Sans";
+    font-size: 16px;
+    font-weight: 500;
+}
+.default-form input:not(input[type="submit"]){
+    outline: none;
+    width: 350px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid var(--yellow);
+    color: var(--light_gray);
+    font-family: "IBM Plex Sans";
+    font-size: 18px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+.default-form input:not(input[type="submit"]):focus{
+    border-bottom: 2px solid var(--white);
+}
+.default-form label{
+    margin-top: 20px;
+    margin-bottom: 9px;
+    color: var(--light_gray);
+    font-weight: 500;
+    font-family: "IBM Plex Sans";
+    font-size: 16px;
+}
+.default-form label:first-child{
+    margin-top: 0px;
+}
+.default-form input[type=submit]{
+    cursor: pointer;
+}
+.yellow-button{
+    width: 200px;
+    height: 50px;
+    border: none;
+    outline: none;
+    background: var(--yellow);
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 15px;
+    text-decoration: none;
+    font-family: "IBM Plex Sans";
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--light_black);
+    transition: 0.3s;
+}
+.yellow-button:hover{
+    background: var(--light_gray);
+}
+.black-button{
+    width: 200px;
+    height: 50px;
+    border: none;
+    outline: none;
+    background: var(--black);
+    color: var(--white);
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 15px;
+    text-decoration: none;
+    font-family: "IBM Plex Sans";
+    font-size: 15px;
+    font-weight: 500;
+    transition: 0.3s;
+    cursor: pointer;
+}
+.black-button:hover{
+    background: var(--black);
+    color: var(--yellow);
+}
+/* стили для текста */
+.white-text{
+    text-decoration: none;
+    font-family: "IBM Plex Sans";
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--white);
+}
+.link-text{
+    text-decoration: none;
+    font-family: "IBM Plex Sans";
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--light_gray);
+    transition: 0.3s;
+}
+.dark-text{
+    text-decoration: none;
+    font-family: "IBM Plex Sans";
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--black);
+    transition: 0.3s;
+}
+.gray-text{
+    text-decoration: none;
+    font-family: "IBM Plex Sans";
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--light_gray);
+    transition: 0.3s;
+}
+.small-text{
+    text-decoration: none;
+    font-family: "IBM Plex Sans";
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--gray);
+    transition: 0.3s;
+}
+.link-text:hover{
+    color: var(--white);
+}
+.yellow-text{
+    text-decoration: none;
+    font-family: "IBM Plex Sans";
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--yellow);
+    transition: 0.3s;
+}
+.yellow-text:hover{
+    opacity: 0.5;
+}
+.bold-text{
+    text-decoration: none;
+    font-family: "IBM Plex Sans";
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--white);
+}
+.title{
+    text-align: center;
+    text-decoration: none;
+    font-family: "IBM Plex Sans";
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--white);
+}
+
+/* header start */
+.logo a{
+    font-family: "IBM Plex Sans";
+    font-size: 25px;
+    font-weight: bold;
+    text-decoration: none;
+    color: var(--white);
+}
+.logo a span{
+    color: var(--yellow);
+}
+.header-up .container{
+    padding: 20px 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header-up{
+    background: var(--black);
+}
+
+.header-up form input{
+    background: var(--light_black);
+    width: 400px;
+    height: 50px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    padding-left: 20px;
+    font-family: "IBM Plex Sans";
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--white);
+}
+.header-up form input::placeholder{
+    font-family: "IBM Plex Sans";
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--light_gray);
+}
+.header-menu ul{
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+.header-menu li{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.header-menu li img{
+    width: 25px;
+    height: 25px;
+}
+.header-menu li p{
+    font-family: "IBM Plex Sans";
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--white);
+}
+
+.header-down{
+    background: var(--light_black);
+}
+.header-down a{
+    font-size: 17px;
+    font-weight: bold;
+}
+.header-down ul{
+    gap: 0px;
+}
+.header-down a{
+    color: var(--white);
+    cursor: pointer;
+    padding: 20px 30px;
+}
+.header-down a:hover{
+    color: var(--black);
+    background: var(--yellow);
+}
+
+
+/* header end */
+
+/* production */
+.production{
+    padding-top: 200px;
+    padding-bottom: 250px;
+    position: relative;
+    z-index: 1;
+}
+.production .title{
+    margin-bottom: 100px;
+    font-size: 24px;
+    color: var(--gray);
+}
+.production p{
+    text-align: center;
+    font-size: 20px;
+    margin-top: 10px;
+    transition: color 0.5s ease;
+}
+.transparent-black-text {
+    color: rgba(0, 0, 0, 0.5);
+}
+.production .block-button{
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+}
+/* recommend */
+.recommend{
+    margin-top: 30px;
+}
+.recommend-content{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+}
+.recommend-elem{
+    width: 300px;
+}
+.recommend-elem-title{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+.recommend-elem-description{
+    margin-top: 10px;
+}
+
+.block-button a{
+    width: 200px;
+    height: 50px;
+    border: none;
+    outline: none;
+    background: var(--yellow);
+    color: var(--black);
+    text-decoration: none;
+}
+.recommend-elem img{
+    width: 300px;
+    height: 300px;
+    border-radius: 20px;
+}
+
+/* news */
+.news{
+    margin-top: 200px;
+}
+.news-content{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+}
+.news-img .title{
+    margin-top: -5px;
+    font-size: 24px;
+    text-align: left;
+}
+.news-img img{
+    margin-top: 30px;
+    width: 550px;
+    height: 500px;
+    border-radius: 50px;
+}
+.news-text .bold-text{
+    margin-bottom: 30px;
+}
+.news-text .link-text{
+    margin-top: 50px;
+}
+.news-text .small-text{
+    margin-top: 50px;
+}
+.news-text form{
+    margin-top: 20px;
+}
+
+.news-text form input{
+    font-family: "IBM Plex Sans";
+    text-align: center;
+    width: 200px;
+    cursor: pointer;
+}
+
+/* about */
+.about{
+    margin-top: 200px;
+}
+.about-content{
+    gap: 150px;
+    justify-content: center;
+    display: flex;
+}
+.about-text .gray-text:nth-child(2){
+    margin-top: 50px;
+}
+.about-text .title{
+    font-size: 24px;
+    text-align: left;
+}
+.about-img img{
+    border-radius: 50px;
+}
+
+/* order */
+.order{
+    margin-top: 100px;
+}
+.order-content{
+    margin-top: 50px;
+    display: flex;
+    gap: 200px;
+    justify-content: center;
+}
+.order-text .white-text{
+    margin-top: 30px;
+}
+
+
+/* register */
+.register, .login{
+    margin-top: 100px;
+}
+.login .default-form input:not(.yellow-button), .register .default-form input:not(.yellow-button){
+    width: 300px;
+}
+.login .yellow-button{
+    height: 50px;
+    width: 120px;
+}
+.register-content, .login-content{
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+}
+.register-content .block-button, .login-content .block-button{
+    display: flex;
+    justify-content: center;
+}
+.auth-help{
+    text-align: center;
+    margin-top: 40px;
+}
+.auth-help p{
+    margin-bottom: 10px;
+}
+.auth-help a{
+    font-size: 18px;
+}
+.auth-help a:hover{
+    color: var(--yellow);
+}
+
+/* brand */
+.brand{
+    margin-top: 100px;
+}
+.brand-content{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+.brand-elem{
+    display: flex;
+    gap: 50px;
+}
+.brand-content ul li{
+    margin-left: 10px;
+}
+.brand-elem img{
+    border-radius: 50px;
+}
+.brand-gallery{
+    margin-top: 50px;
+    display: flex;
+    gap: 30px;
+}
+.brand-gallery-img img{
+    cursor: pointer;
+    border-radius: 30px;
+    width: 250px;
+    height: 150px;
+}
+
+#modal {
+    display: none;
+    position: fixed;
+    justify-content: center;
+    z-index: 1;
+    padding-top: 50px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.9);
+}
+
+
+#modal-img {
+    border-radius: 50px;
+    margin: auto;
+    display: block;
+    max-width: 500px;
+    max-height: 500px;
+    margin-top: 300px;
+}
+
+
+.close {
+    position: absolute;
+    margin-top: 230px;
+    right: calc(50% - 250px);
+    font-size: 50px;
+    font-weight: bold;
+    color: #f1f1f1;
+    cursor: pointer;
+}
+
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* products */
+.products {
+    margin-top: 100px;
+}
+.products-content{
+    margin-top: 70px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+.products p {
+    margin-top: 20px;
+    text-align: center;
+}
+.products-card{
+    border: 2px solid var(--light_black);
+    padding: 0px;
+    width: 300px;
+    border-radius: 30px;
+}
+.products-card-title, .products-card-info{
+    padding: 0px 20px 20px 20px;
+}
+.products-card img{
+    width: 300px;
+    height: 350px;
+    border-radius: 30px;
+}
+.products-card-title{
+    margin-top: 10px;
+    margin-bottom: -15px;
+}
+.products-card-info p{
+    margin-top: 3px;
+    text-align: left;
+}
+.products-card .yellow-button{
+    height: 40px;
+    text-align: center;
+    cursor: pointer;
+}
+.counter{
+    margin-bottom: 10px;
+}
+.counter span{
+    margin: 0px 7px;
+}
+.counter button{
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    outline: none;
+    border: none;
+    background: var(--white);
+    font-size: 16px;
+    text-align: center;
+    align-items: center;
+}
+
+/* basket */
+.basket{
+    margin-top: 100px;
+}
+.basket-content{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 30px;
+    margin-top: 100px;
+}
+.basket-card{
+    gap: 50px;
+    border-radius: 25px;
+    padding: 25px;
+    border: 2px solid var(--light_black);
+    display: flex;
+    width: 400px;
+}
+.basket-info{
+    flex-direction: column;
+    display: flex;
+}
+.basket-card .counter{
+    margin-top: 10px;
+}
+.basket-price{
+    margin-top: 20px;
+}
+.basket-card img {
+    border-radius: 30px;
+    width: 200px;
+    height: 200px;
+}
+.basket-total{
+    float: right;
+}
+
+
+
