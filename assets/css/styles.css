@@ -51,6 +51,12 @@ body{
 .block-button{
     margin-top: 20px;
 }
+.line {
+    margin-top: 50px;
+    border: 2px solid #939393;
+    height: 2px;
+    width: 100%;
+}
 :root{
     --white: RGB(255, 255, 255);
     --black: black;
@@ -59,7 +65,7 @@ body{
     --gray: #939393;
     --yellow: #fcc942;
 }
-#phone-field, #password-field{
+#phone-field, #password-field, #product-field{
     color: #c70202;
     margin-top: 10px;
     font-weight: 400;
@@ -641,6 +647,9 @@ body{
     display: flex;
     width: 400px;
 }
+.basket-title p {
+    margin-top: 20px;
+}
 .basket-info{
     flex-direction: column;
     display: flex;
@@ -660,5 +669,17 @@ body{
     float: right;
 }
 
+/* admin */
+.add-product{
+    margin-top: 100px;
+}
+.add-product-content {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+}
+.edit-product {
+    margin-top: 100px;
+}
 
 
