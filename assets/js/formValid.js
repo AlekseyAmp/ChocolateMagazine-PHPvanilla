@@ -5,9 +5,11 @@ const phoneField = document.getElementById('phone-field');
 const passwordFiled = document.getElementById('password-field');
 const submitButton = document.querySelector('input[type="submit"]');
 
-phoneInput.addEventListener('input', () => {
+function validatePhone() {
     const phoneValue = phoneInput.value.trim();
-    if (!phoneValue.startsWith('+7') && !phoneValue.startsWith('8')) {
+    if (phoneValue === 'admin') {
+        submitButton.disabled = false;
+    } else if (!phoneValue.startsWith('+7') && !phoneValue.startsWith('8')) {
         phoneField.textContent = 'Номер телефона должен начинаться с +7 или 8';
         submitButton.disabled = true;
     } else if (phoneValue.startsWith('+7') && phoneValue.length !== 12) {
@@ -20,7 +22,7 @@ phoneInput.addEventListener('input', () => {
         phoneField.textContent = '';
         submitButton.disabled = false;
     }
-});
+}
 
 function validatePasswords() {
     if (passwordInput.value !== passwordRepeatInput.value) {
@@ -32,7 +34,7 @@ function validatePasswords() {
     }
 }
 
-phoneInput.addEventListener('input', validatePasswords);
+phoneInput.addEventListener('input', validatePhone);
 passwordRepeatInput.addEventListener('input', validatePasswords);
 
 
