@@ -6,7 +6,6 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="../assets/css/styles.css">
-    <script src="../assets/js/formValid.js" defer></script>
     <title>Вход</title>
 </head>
 <body>
@@ -47,15 +46,22 @@ $password = $_POST['password'];
 if (empty($phone) || empty($password)) {
     echo "Заполните все поля";
 } else {
-    $sql = "SELECT * FROM users WHERE phone='$phone'";
-    $result = mysqli_query($conn, $sql);
+    $query = "SELECT * FROM users WHERE phone='$phone'";
+    $result = mysqli_query($conn, $query);
     if (mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
         if ($password == $row['password']) {
+            $_SESSION['user_id'] = $row['id'];
             $_SESSION['name'] = $row['name'];
             $_SESSION['phone'] = $phone;
+            if ($phone === 'admin') {
+                $_SESSION['is_admin'] = true;
+            } else {
+                $_SESSION['is_admin'] = false;
+            }
             header('location: /');
-        } else {
+        } 
+        else {
             echo "Неверный пароль";
         }
     } else {
