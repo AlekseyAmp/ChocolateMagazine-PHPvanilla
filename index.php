@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="assets/js/switchLight.js" defer></script>
     <script src="assets/js/formValid.js" defer></script>
@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="assets/css/styles.css">
     <title>Главная</title>
 </head>
+
 <body>
     <?php include('includes/header.php') ?>
 
@@ -40,64 +41,33 @@
                 Рекомендуемые шоколадки
             </div>
             <div class="recommend-content">
-                <div class="recommend-elem">
-                    <img src="./assets/img/recommend/milkChocolate.jpg" alt="#">
-                    <div class="recommend-elem-title">
-                        <h3 class="bold-text">Молочный</h3>
-                        <p class="gray-text">300 руб.</p>
-                    </div>
-                    <div class="recommend-elem-description">
-                        <p class="small-text">
-                            Наслаждайтесь богатым и декадентским лакомством
-                            с нашей плиткой молочного шоколада!
-                            Плитка изготовлена из сливочного высококачественного молока
-                            и какао-бобов, что обеспечивает приятный вкус.
-                        </p>
-                    </div>
-                    <div class="block-button">
-                        <a href="/products" class="yellow-button">Посмотреть</a>
-                    </div>
-                </div>
+                <?php
+                require_once './db/connect.php';
+                $query = "SELECT * FROM products WHERE is_recommend = 1";
+                if ($result = $conn->query($query)) {
+                    foreach ($result as $row) {
+                        echo "<div class='recommend-elem'>";
 
-                <div class="recommend-elem">
-                    <img src="./assets/img/recommend/verymilkChocolate.jpg" alt="#">
-                    <div class="recommend-elem-title">
-                        <h3 class="bold-text">Очень молочный</h3>
-                        <p class="gray-text">300 руб.</p>
-                    </div>
-                    <div class="recommend-elem-description">
-                        <p class="small-text">
-                            Приготовьтесь к невероятно богатому
-                            и сливочному наслаждению с нашим батончиком
-                            Extra Milk Chocolate! В нашем батончике
-                            содержится еще больше сливок и какао-бобов,
-                            что придает ему мягкий бархатистый вкус,
-                            который наверняка удовлетворит ваши пристрастия к сладкому
-                        </p>
-                    </div>
-                    <div class="block-button">
-                        <a href="/products" class="yellow-button">Посмотреть</a>
-                    </div>
-                </div>
+                        $img_src = 'data:image/jpeg;base64,' . base64_encode($row['photo']);
+                        echo "<img src='" . $img_src . "' alt='#'>";
 
-                <div class="recommend-elem">
-                    <img src="./assets/img/recommend/whiteChocolate.jpg" alt="#">
-                    <div class="recommend-elem-title">
-                        <h3 class="bold-text">Белый</h3>
-                        <p class="gray-text">300 руб.</p>
-                    </div>
-                    <div class="recommend-elem-description">
-                        <p class="small-text">
-                            Побалуйте себя роскошным угощением с нашей плиткой из белого шоколада!
-                            Наш батончик изготовлен из сливочного белого шоколада,
-                            который обладает восхитительно
-                            сладким вкусом, который обязательно придется вам по вкусу.
-                        </p>
-                    </div>
-                    <div class="block-button">
-                        <a href="/products" class="yellow-button">Посмотреть</a>
-                    </div>
-                </div>
+                        echo "<div class='recommend-elem-title'>";
+                        echo "<h3 class='bold-text'>" . $row['name'] . "</h3>";
+                        echo "<p class='white-text'>Цена: " . $row['price'] . " руб.</p>";
+                        echo "</div>";
+
+                        echo "<div class='recommend-elem-description'>";
+                        echo "<p class='small-text'> " . $row['description'] . " </p>";
+                        echo "</div>";
+
+                        echo "<div class='block-button'>";
+                        echo "<a href='/products' class='yellow-button'>Посмотреть</a>";
+                        echo "</div>";
+
+                        echo "</div>";
+                    }
+                }
+                ?>
             </div>
         </section>
 
@@ -226,4 +196,5 @@
         </section>
     </main>
 </body>
+
 </html>
