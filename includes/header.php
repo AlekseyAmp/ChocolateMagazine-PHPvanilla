@@ -15,9 +15,17 @@
                     </li>
                     <?php
                     // проверяем, есть ли данные пользователя в сессии
-                    if (empty($_SESSION['number']) && empty($_SESSION['name'])) {
+                    if (empty($_SESSION['name'])) {
                         echo '<li><a class="link-text" href="../auth/login">Вход</a></li>
                         <li><a class="link-text" href="../auth/register">Регистрация</a></li>';
+                    } elseif($_SESSION['is_admin']) {
+                        echo $_SESSION['is_admin'];
+                        echo '<li><a class="yellow-text" href="admin">Админ панель</a></li>
+                        <li><img src="../assets/img/header/notification.svg" alt="#">
+                        <a class="link-text" href="#">' . $_SESSION['name'] . '</a></li>
+                        <li><img src="../assets/img/header/basket.svg" alt="#">
+                        <a class="link-text" href="basket">Корзина</a></li>
+                        <li><a class="link-text" href="auth/logout">Выход</a></li>'; 
                     } else {
                         echo '<li><img src="../assets/img/header/notification.svg" alt="#">
                       <a class="link-text" href="#">' . $_SESSION['name'] . '</a></li>
