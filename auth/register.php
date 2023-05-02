@@ -57,28 +57,38 @@ $password_repeat = $_POST['password_repeat'];
 
 if (empty($name) || empty($phone) || empty($password) || empty($password_repeat)) {
     echo "Заполните все поля";
+} elseif (!preg_match('/^\+7|8/', $phone) && $phone !== 'admin') {
+    echo "Номер телефона должен начинаться с +7 или 8";
+} elseif (preg_match('/^\+7/', $phone) && strlen($phone) !== 12 && $phone !== 'admin') {
+    echo "Номер телефона, начинающийся с +7, должен иметь 12 символов";
+} elseif (preg_match('/^8/', $phone) && strlen($phone) !== 11 && $phone !== 'admin') {
+    echo "Номер телефона, начинающийся с 8, должен иметь 11 символов";
 } elseif ($password !== $password_repeat) {
     echo "Пароли не совпадают";
 } else {
-    $sql = "SELECT * FROM users WHERE phone='$phone'";
-    $result = mysqli_query($conn, $sql);
+    $query = "SELECT * FROM users WHERE phone='$phone'";
+    $result = mysqli_query($conn, $query);
     if (mysqli_num_rows($result) > 0) {
         echo "Пользователь с таким номером уже существует";
     } else {
-        $sql = "INSERT INTO users (name, phone, password)
+        $query = "INSERT INTO users (name, phone, password)
                     VALUES ('$name', '$phone', '$password')";
 
-        if (mysqli_query($conn, $sql)) {
-            if ($name === "admin") {
+        if (mysqli_query($conn, $query)) {
+            if ($phone === "admin") {
+                $_SESSION['is_admin'] = true;
                 $user_id = mysqli_insert_id($conn);
-                $sql = "UPDATE users SET is_admin = true WHERE id = $user_id";
-                mysqli_query($conn, $sql);
+                $query = "UPDATE users SET is_admin = true WHERE id = $user_id";
+                mysqli_query($conn, $query);
+            } else {
+                $_SESSION['name'] = $name;
+                $_SESSION['phone'] = $phone;
+                $_SESSION['user_id'] = mysqli_insert_id($conn);
+                $_SESSION['is_admin'] = false;
             }
-            $_SESSION['name'] = $name;
-            $_SESSION['phone'] = $phone;
             header('location: /');
         } else {
-            echo "Ошибка: " . $sql . "<br>" . mysqli_error($conn);
+            echo "Ошибка";
         }
     }
 }
