@@ -1,3 +1,36 @@
+<?php session_start();
+
+require_once './db/connect.php';
+
+if (isset($_POST['free_order_submit'])) {
+    $name = "Белый шоколад с клубникой";
+    $phone = $_SESSION['phone'];
+    $order_time = date("Y-m-d H:i:s");
+    $query = "INSERT INTO orders (chocolate_name, user_phone, order_time) VALUES ('$name', '$phone', '$order_time')";
+    mysqli_query($conn, $query);
+    header('Location: success');
+    exit();
+}
+
+if (isset($_POST['order_submit'])) {
+    $chocolate_name = $_POST['chocolate'];
+    $name = $chocolate_name;
+    $phone = $_POST['phone'];
+    $index = $_POST['index'];
+    $order_time = date("Y-m-d H:i:s");
+    if (empty($name) || empty($phone) || empty($index)) {
+        echo "<p class='white-text'>Заполните все поля</p>";
+    } else {
+        $query = "INSERT INTO orders (chocolate_name, user_phone, order_time) VALUES ('$chocolate_name', '$phone', '$order_time')";
+        mysqli_query($conn, $query);
+        header('Location: success');
+        exit();
+    }
+}
+?>
+
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -29,7 +62,7 @@
                     </button>
                     <script>
                         document.getElementById("catalog-button").addEventListener("click", function() {
-                            window.location.href = "products";
+                            window.location.href = "/products";
                         });
                     </script>
                 </div>
@@ -99,8 +132,8 @@
                         У вас есть бесплатная возможность попробовать новинку!
                         <br> После нажатия на кнопку, мы доставим Вам плитку в течение 3 дней.
                     </p>
-                    <form method="POST" action="index.php">
-                        <input type="submit" class="yellow-button" value="Получить на пробу">
+                    <form method="POST" action="/">
+                        <input type="submit" class="yellow-button" name="free_order_submit" value="Получить на пробу">
                     </form>
                 </div>
             </div>
@@ -169,7 +202,7 @@
                         <a href="../auth/register" class="yellow-button">Зарегестрироваться</a>
                     </div>
                 </div>
-                <form class="default-form" action="index.php" method="post">
+                <form class="default-form" action="/" method="post">
                     <label for="chocolate">Выберите товар</label>
                     <select name="chocolate" id="chocolate">
                         <option value="Молочный">Молочный</option>
@@ -178,17 +211,17 @@
                     </select>
 
                     <label for="name">Ваше имя:</label>
-                    <input type="text" id="name">
+                    <input name="name" type="text" id="name">
 
                     <label for="number">Ваш номер телефона:</label>
-                    <input type="text" id="number">
+                    <input name="phone" type="text" id="number">
                     <span id="phone-field"></span>
 
                     <label for="mail-index">Почтовый индекс:</label>
-                    <input type="number" id="mail-index">
+                    <input name="index" type="number" id="mail-index">
 
                     <div class="block-button">
-                        <input type="submit" value="Заказать" class="yellow-button">
+                        <input type="submit" name="order_submit" class="yellow-button" value="Заказать">
                     </div>
                 </form>
 
@@ -198,3 +231,4 @@
 </body>
 
 </html>
+<?php mysqli_close($conn); ?>

@@ -13,10 +13,34 @@ if (isset($_POST['delete_from_basket'])) {
     if ($conn->query($query) === TRUE) {
         header('location: basket');
     } else {
-        echo "Ошибка";
+        echo "<p class='white-text'>Ошибка</p>";
     }
 }
 
+
+if (isset($_POST['order_submit'])) {
+    $user_phone = $_SESSION['phone'];
+    
+    $basket_query = "SELECT products.name FROM basket
+                     JOIN products ON basket.product_id = products.id
+                     WHERE basket.user_id = ".$_SESSION['user_id'];
+    $basket_result = $conn->query($basket_query);
+    if ($basket_result) {
+        while ($row = $basket_result->fetch_assoc()) {
+            $chocolate_name = $row['name'];
+            $order_query = "INSERT INTO Orders (user_phone, chocolate_name) 
+                            VALUES ('$user_phone', '$chocolate_name')";
+            $conn->query($order_query);
+        }
+    }
+    $basket_result->free();
+    $delete_query = "DELETE FROM basket WHERE user_id=".$_SESSION['user_id'];
+    if ($conn->query($delete_query) === TRUE) {
+        header('location: success');
+    } else {
+        echo "<p class='white-text'>Ошибка</p>";
+    }
+}
 ?>
 
 <!doctype html>
@@ -37,12 +61,12 @@ if (isset($_POST['delete_from_basket'])) {
     <main>
         <section class="basket container">
             <div class="basket-total">
-                <form action="index.php">
+                <form action="basket" method="post">
                     <p class="bold-text">
                         Итого: <span class="yellow-text total-price">0 руб.</span>
                     </p>
                     <div class="block-button">
-                        <input type="submit" value="Оплатить" class="yellow-button">
+                        <input type="submit" name="order_submit" value="Заказать" class="yellow-button">
                     </div>
                 </form>
             </div>
@@ -68,7 +92,7 @@ if (isset($_POST['delete_from_basket'])) {
                         echo "<form action='basket' method='post'>";
                         echo "<input type='hidden' name='user_id' value='" . $_SESSION['user_id'] . "'>";
                         echo "<input type='hidden' name='product_id' value='" . $row['id'] . "'>";
-                        echo "<input type='submit' name='delete_from_basket' value='Убрать из корзины' class='yellow-button'>";
+                        echo "<input type='submit' name='delete_from_basket' value='Убрать из корзины' class='black-button'>";
                         echo "</form>";
                         echo "</div>";
 
@@ -76,12 +100,12 @@ if (isset($_POST['delete_from_basket'])) {
 
                         echo "<div class='basket-title'>";
                         echo "<h3 class='bold-text'>" . $row['name'] . "</h3>";
-                        echo "<p class='gray-text'>Вес: " . $row['weight'] .  "г.</p>";
+                        echo "<p class='gray-text'>Вес: " . $row['weight'] .  " г.</p>";
                         echo "</div>";
 
                         
                         echo "<div class='basket-price'>";
-                        echo "<p class='white-text'>Цена: " . $row['price'] .  "г.</p>";
+                        echo "<p class='white-text'>Цена: " . $row['price'] .  " руб.</p>";
                         echo "</div>";
                         
                         echo "<div class='counter'>";
