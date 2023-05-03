@@ -143,6 +143,7 @@ body{
     font-weight: 500;
     color: var(--light_black);
     transition: 0.3s;
+    cursor: pointer;
 }
 .yellow-button:hover{
     background: var(--light_gray);
@@ -682,4 +683,39 @@ body{
     margin-top: 100px;
 }
 
+/* payment */
+.payment {
+    margin-top: 100px;
+}
+.payment-content{
+    display: flex;
+    justify-content: center;
+}
+.payment-content .default-form {
+    margin-top: 50px;
+}
 
+/* succes */
+.succes {
+    margin-top: 100px;
+}
+.succes-content{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* orders */
+.orders {
+    margin-top: 100px;
+}
+.order-content {
+    margin-top: 50px;
+}
+.orders-elem {
+    margin-top: 30px;
+}
+.orders-elem-info {
+    display: flex;
+    gap: 30px;
+}
