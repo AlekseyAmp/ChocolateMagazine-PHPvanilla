@@ -17,7 +17,7 @@ if (isset($_POST['add_to_basket'])) {
             header('location: products');
             exit();
         } else {
-            echo "Ошибка";
+            echo "<p class='white-text'>Ошибка</p>";
         }
     }
 }
