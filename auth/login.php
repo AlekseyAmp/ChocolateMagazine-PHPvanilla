@@ -44,7 +44,7 @@ $phone = $_POST['number'];
 $password = $_POST['password'];
 
 if (empty($phone) || empty($password)) {
-    echo "Заполните все поля";
+    echo "<p class='white-text'>Заполните все поля</p>";
 } else {
     $query = "SELECT * FROM users WHERE phone='$phone'";
     $result = mysqli_query($conn, $query);
@@ -62,10 +62,10 @@ if (empty($phone) || empty($password)) {
             header('location: /');
         } 
         else {
-            echo "Неверный пароль";
+            echo "<p class='white-text'>Неверный пароль</p>";
         }
     } else {
-        echo "Пользователь с таким номером телефона не найден";
+        echo "<p class='white-text'>Пользователь с таким номером телефона не найден</p>";
     }
 }
 

@@ -56,20 +56,20 @@ $password = $_POST['password'];
 $password_repeat = $_POST['password_repeat'];
 
 if (empty($name) || empty($phone) || empty($password) || empty($password_repeat)) {
-    echo "Заполните все поля";
+    echo "<p class='white-text'>Заполните все поля</p>";
 } elseif (!preg_match('/^\+7|8/', $phone) && $phone !== 'admin') {
-    echo "Номер телефона должен начинаться с +7 или 8";
+    echo "<p class='white-text'>Номер телефона должен начинаться с +7 или 8</p>";
 } elseif (preg_match('/^\+7/', $phone) && strlen($phone) !== 12 && $phone !== 'admin') {
-    echo "Номер телефона, начинающийся с +7, должен иметь 12 символов";
+    echo "<p class='white-text'>Номер телефона, начинающийся с +7, должен иметь 12 символов</p>";
 } elseif (preg_match('/^8/', $phone) && strlen($phone) !== 11 && $phone !== 'admin') {
-    echo "Номер телефона, начинающийся с 8, должен иметь 11 символов";
+    echo "<p class='white-text'>Номер телефона, начинающийся с 8, должен иметь 11 символов</p>";
 } elseif ($password !== $password_repeat) {
-    echo "Пароли не совпадают";
+    echo "<p class='white-text'>Пароли не совпадают</p>";
 } else {
     $query = "SELECT * FROM users WHERE phone='$phone'";
     $result = mysqli_query($conn, $query);
     if (mysqli_num_rows($result) > 0) {
-        echo "Пользователь с таким номером уже существует";
+        echo "<p class='white-text'>Пользователь с таким номером уже существует</p>";
     } else {
         $query = "INSERT INTO users (name, phone, password)
                     VALUES ('$name', '$phone', '$password')";
@@ -88,7 +88,7 @@ if (empty($name) || empty($phone) || empty($password) || empty($password_repeat)
             }
             header('location: /');
         } else {
-            echo "Ошибка";
+            echo "<p class='white-text'>Ошибка</p>";
         }
     }
 }
